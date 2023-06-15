@@ -185,7 +185,7 @@ const Dex = new class implements ModdedDex {
 		return `${prefix}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/`;
 	})();
 */
-resourcePrefix = 'https://raw.githubusercontent.com/spiral-sanctum/sprites/master'
+resourcePrefix = 'https://raw.githubusercontent.com/spiral-sanctum/sprites/master/'
 
 /**
 	fxPrefix = (() => {
@@ -194,7 +194,7 @@ resourcePrefix = 'https://raw.githubusercontent.com/spiral-sanctum/sprites/maste
 	})();
 */
 
-fxPrefix = 'https://raw.githubusercontent.com/spiral-sanctum/sprites/master/fx'
+fxPrefix = 'https://raw.githubusercontent.com/spiral-sanctum/sprites/master/fx/'
 
 	loadedSpriteData = {xy: 1, bw: 0};
 	moddedDexes: {[mod: string]: ModdedDex} = {};
