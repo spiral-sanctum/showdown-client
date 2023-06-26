@@ -550,7 +550,7 @@ abstract class BattleTypedSearch<T extends SearchType> {
 	 */
 	set: PokemonSet | null = null;
 
-	protected formatType: 'doubles' | 'bdsp' | 'bdspdoubles' | 'letsgo' | 'metronome' | 'natdex' | 'nfe' |
+	protected formatType: 'doubles' | 'bdsp' | 'bdspdoubles' | 'spiral' | 'letsgo' | 'metronome' | 'natdex' | 'nfe' |
 	'dlc1' | 'dlc1doubles' | 'stadium' | 'lc' | null = null;
 
 	/**
@@ -580,8 +580,10 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			this.dex = Dex.forGen(gen);
 		} else if (!format) {
 			this.dex = Dex;
-		}
-
+    }
+    if (format.includes('spiral')) {
+    			this.formatType = 'spiral';
+    		}
 		if (format.startsWith('dlc1')) {
 			if (format.includes('doubles')) {
 				this.formatType = 'dlc1doubles';
@@ -803,6 +805,7 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			this.formatType === 'dlc1' ? 'gen8dlc1' :
 			this.formatType === 'dlc1doubles' ? 'gen8dlc1doubles' :
 			this.formatType === 'natdex' ? `gen${gen}natdex` :
+      this.formatType === 'spiral' ? `spiral` :
 			this.formatType === 'stadium' ? `gen${gen}stadium${gen > 1 ? gen : ''}` :
 			`gen${gen}`;
 		if (table && table[tableKey]) {
@@ -907,6 +910,8 @@ class BattlePokemonSearch extends BattleTypedSearch<'pokemon'> {
 			table = table['gen' + dex.gen];
 		} else if (this.formatType?.startsWith('bdsp')) {
 			table = table['gen8' + this.formatType];
+    } else if (this.formatType?.startsWith('spiral')) { //might be broken
+      table = table['gen' + this.formatType];
 		} else if (this.formatType === 'letsgo') {
 			table = table['gen7letsgo'];
 		} else if (this.formatType === 'natdex') {

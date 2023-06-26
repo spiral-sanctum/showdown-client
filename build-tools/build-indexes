@@ -323,10 +323,12 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 	const STADIUM = [2.04, 1.04];
 	const NATDEX = [9.1, 8.1];
 	const OTHER = [9.2, 8.6, 8.4, 8.2, 8.1, -8.4, -8.6, 7.1];
+	const SPIRAL = [9.5];
 
 	// process.stdout.write("\n  ");
-	for (const genIdent of [...GENS, ...DOUBLES, ...VGC, ...NFE, ...STADIUM, ...OTHER, ...NATDEX, ...LC]) {
+	for (const genIdent of [...GENS, ...DOUBLES, ...VGC, ...NFE, ...STADIUM, ...OTHER, ...NATDEX, ...LC, ...SPIRAL]) {
 		const isLetsGo = (genIdent === 7.1);
+		const isSPIRAL = (genIdent === 9.5)
 		const isBDSP = (genIdent === 8.6 || genIdent === -8.6);
 		const isMetBattle = ('' + genIdent).endsWith('.2');
 		const isNFE = ('' + genIdent).endsWith('.3');
@@ -341,6 +343,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			let genStr = 'gen' + genNum;
 			if (isDLC1) genStr += 'dlc1';
 			if (isLetsGo) genStr += 'letsgo';
+			if (isSPIRAL) genStr += 'spiral'
 			if (isBDSP) genStr += 'bdsp';
 			if (isStadium) genStr += 'stadium' + (genNum > 1 ? genNum : '');
 			return genStr;
@@ -425,6 +428,11 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				if (isNatDex) {
 					return species.natDexTier;
 				}
+				if (isSPIRAL) {
+					let tier = species.tier;
+					tier = Dex.mod('spiral').species.get(species.name).tier;
+					return tier;
+				}
 				return species.tier;
 			})();
 			overrideTier[species.id] = tier;
@@ -500,6 +508,12 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			BattleTeambuilderTable['gen8bdsp'].overrideTier = overrideTier;
 			BattleTeambuilderTable['gen8bdsp'].monotypeBans = monotypeBans;
 			BattleTeambuilderTable['gen8bdsp'].formatSlices = formatSlices;
+		}	else if (isSPIRAL) { //this may be wrong
+			BattleTeambuilderTable['spiral'] = {};
+			BattleTeambuilderTable['spiral'].learnsets = {};
+			BattleTeambuilderTable['spiral'].tiers = tiers;
+			BattleTeambuilderTable['spiral'].overrideTier = overrideTier;
+			BattleTeambuilderTable['spiral'].formatSlices = formatSlices;
 		} else if (isVGC) {
 			BattleTeambuilderTable[gen + 'vgc'] = {};
 			BattleTeambuilderTable[gen + 'vgc'].tiers = tiers;
@@ -535,6 +549,9 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const tierOrder = (() => {
 			if (isVGC) {
 				return ["Mythical", "Restricted Legendary", "Regular", "NFE", "LC"];
+			}
+			if (isSPIRAL) {
+				return ["AG", "Uber", "(Uber)", "OU", "(OU)", "UUBL", "UU", "NUBL", "NU", "(NU)", "NFE", "LC"];
 			}
 			if (isDoubles && genNum > 4) {
 				return ["DUber", "(DUber)", "DOU", "DBL", "(DOU)", "DUU", "(DUU)", "New", "NFE", "LC"];
