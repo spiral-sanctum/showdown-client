@@ -343,7 +343,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			let genStr = 'gen' + genNum;
 			if (isDLC1) genStr += 'dlc1';
 			if (isLetsGo) genStr += 'letsgo';
-			if (isSPIRAL) genStr += 'spiral'
+			if (isSPIRAL) genStr += 'spiral';
 			if (isBDSP) genStr += 'bdsp';
 			if (isStadium) genStr += 'stadium' + (genNum > 1 ? genNum : '');
 			return genStr;
