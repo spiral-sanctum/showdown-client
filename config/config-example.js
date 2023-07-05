@@ -30,5 +30,5 @@ Config.roomsFirstOpenScript = function () {
 };
 
 Config.customcolors = {
-	'zarel': 'aeo'
+	'mnemiic': 'aeo'
 };
