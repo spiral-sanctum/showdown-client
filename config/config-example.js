@@ -19,8 +19,8 @@ Config.whitelist = [
 // address bar is `Config.routes.client`.
 Config.defaultserver = {
 	id: 'showdown',
-	host: 'vps-d556ca86.vps.ovh.ca',
-	port: 22,
+	host: 'sim3.psim.us',
+	port: 443,
 	httpport: 8000,
 	altport: 80,
 	registered: true
