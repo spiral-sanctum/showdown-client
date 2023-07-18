@@ -30,10 +30,10 @@ Config.roomsFirstOpenScript = function () {
 };
 
 Config.customcolors = {
-	'zarel': 'aeo'
+	'Mnemiic': 'aeo'
 };
 /*** Begin automatically generated configuration ***/
-Config.version = "0.11.2 (93189e75)";
+Config.version = "0.11.2 (c48d7086)";
 
 Config.routes = {
 	root: 'pokemonshowdown.com',
