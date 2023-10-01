@@ -33,7 +33,7 @@ Config.customcolors = {
 	'Mnemiic': 'aeo'
 };
 /*** Begin automatically generated configuration ***/
-Config.version = "0.11.2 (d801bb9f)";
+Config.version = "0.11.2 (2cd95ac0)";
 
 Config.routes = {
 	root: 'pokemonshowdown.com',
